@@ -1,4 +1,4 @@
-<aside class="main-sidebar">
+        <aside class="main-sidebar">
             <!-- sidebar-->
             <section class="sidebar">
 
@@ -32,7 +32,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="{{url('teacher')}}"><i class="ti-more"></i>Teacher</a></li>
+                            <li><a href="{{route('teacher-view')}}"><i class="ti-more"></i>view Teacher</a></li>
+                            <li><a href="{{route('teacher-add')}}"><i class="ti-more"></i>Add Teacher</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -44,7 +45,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href=""><i class="ti-more"></i>Student</a></li>
+                            <li><a href="{{route('student-view')}}"><i class="ti-more"></i>view Student</a></li>
+                            <li><a href="{{route('student-add')}}"><i class="ti-more"></i>Add Student</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
@@ -56,8 +58,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href=""><i class="ti-more"></i>Feedback List</a></li>
-                            <li><a href=""><i class="ti-more"></i>Feedback Reply List</a></li>
+                            <li><a href="{{url('feedback-list')}}"><i class="ti-more"></i>Feedback List</a></li>
+                            <li><a href="{{url('feedback-reply-list')}}"><i class="ti-more"></i>Feedback Reply List</a></li>
                         </ul>
                     </li>                    
                     <li class="treeview">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FeedbackReply;
+use App\Models\Feedback;
 use Illuminate\Http\Request;
 
 class FeedbackReplyController extends Controller
@@ -14,72 +15,39 @@ class FeedbackReplyController extends Controller
      */
     public function index()
     {
-        //
+        $feedbackReplyList = FeedbackReply::all();
+        // dd($feedbackList);
+        return view('admin.feedback.feedbackReplyList', get_defined_vars());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    
+    public function editReply(FeedbackReply $feedbackReply, $id)
     {
-        //
+        // dd("dd");
+        $editFeedbackReply = FeedbackReply::find($id);
+        return view ('admin.feedback.editFeedbackReply', get_defined_vars());
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function updateFeedbackReply(Request $request)
     {
-        //
+        // dd("Reply");
+        FeedbackReply::where('id',$request->id)->update([
+            'reply'=>$request->reply,
+        ]);
+
+        $notification= array(
+            'message' =>'Feedback Reply Updated successfully',
+            'alert-type'=>'success'
+        );
+        return redirect()->back();
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\FeedbackReply  $feedbackReply
-     * @return \Illuminate\Http\Response
-     */
-    public function show(FeedbackReply $feedbackReply)
+    public function deleteReply(FeedbackReply $feedbackReply, $id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\FeedbackReply  $feedbackReply
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(FeedbackReply $feedbackReply)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\FeedbackReply  $feedbackReply
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, FeedbackReply $feedbackReply)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\FeedbackReply  $feedbackReply
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(FeedbackReply $feedbackReply)
-    {
-        //
+        // dd("ddd");
+        FeedbackReply::where('id',$id)->delete();
+		$notification= array(
+            'message' =>'Feedback Reply Deleted successfully',
+            'alert-type'=>'success'
+        );
+    	return redirect()->back();
     }
 }
