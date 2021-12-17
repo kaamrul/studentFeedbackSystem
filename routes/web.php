@@ -7,10 +7,14 @@ use App\Http\Controllers\TeacherController;
 
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\FeedbackReplyController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\AssignTeacherCourseController;
+use App\Http\Controllers\AssignStudentCourseController;
 
 
 Route::get('/', function () {
-    return view('well');  
+    return view('login');  
 }); 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
@@ -64,8 +68,66 @@ Route::prefix('teacher')->group(function(){
 
 
 
-    
+Route::prefix('department')->group(function(){
 
+    Route::get('/view',[DepartmentController::class,'index'])->name('department-view');
+    Route::get('/add',[DepartmentController::class,'create'])->name('department-add');
+    Route::post('/store',[DepartmentController::class,'store'])->name('department-store');
+    Route::get('/edit/{id}',[DepartmentController::class,'edit']);
+    Route::post('/update',[DepartmentController::class,'update'])->name('department-update');
+    Route::get('/delete/{id}',[DepartmentController::class,'destroy']);
+
+});
+
+
+Route::prefix('course')->group(function(){
+
+    Route::get('/view',[CourseController::class,'index'])->name('course-view');
+    Route::get('/add',[CourseController::class,'create'])->name('course-add');
+    Route::post('/store',[CourseController::class,'store'])->name('course-store');
+    Route::get('/edit/{id}',[CourseController::class,'edit']);
+    Route::post('/update',[CourseController::class,'update'])->name('course-update');
+    Route::get('/delete/{id}',[CourseController::class,'destroy']);
+
+});
+
+
+Route::prefix('teacherss')->group(function(){
+
+    Route::get('/view',[AssignTeacherCourseController::class,'index'])->name('teacherss-view');
+    Route::get('/add',[AssignTeacherCourseController::class,'create'])->name('teacherss-add');
+    Route::post('/store',[AssignTeacherCourseController::class,'store'])->name('teacherss-store');
+    Route::get('/edit/{id}',[AssignTeacherCourseController::class,'edit']);
+    Route::post('/update',[AssignTeacherCourseController::class,'update'])->name('teacherss-update');
+    Route::get('/delete/{id}',[AssignTeacherCourseController::class,'destroy']);
+
+});
+
+
+Route::prefix('studentss')->group(function(){
+
+    Route::get('/view',[AssignStudentCourseController::class,'index'])->name('studentss-view');
+    Route::get('/add',[AssignStudentCourseController::class,'create'])->name('studentss-add');
+    Route::post('/store',[AssignStudentCourseController::class,'store'])->name('studentss-store');
+    Route::get('/edit/{id}',[AssignStudentCourseController::class,'edit']);
+    Route::post('/update',[AssignStudentCourseController::class,'update'])->name('studentss-update');
+    Route::get('/delete/{id}',[AssignStudentCourseController::class,'destroy']);
+
+});
+
+Route::prefix('feedback')->group(function(){
+
+    Route::get('/teachersList',[FeedbackController::class,'indexFeedbackList'])->name('feedback-teachersList');
+    Route::get('/reply/{id}',[FeedbackController::class,'feedbackReply'])->name('feedback-reply');
+    Route::post('/replyUpdate',[FeedbackController::class,'replyUpdate'])->name('feedback-replyUpdate');
+
+    Route::get('/studentList',[FeedbackController::class,'giveFeedbackList'])->name('feedback-studentList');
+    Route::get('/giveFeedback',[FeedbackController::class,'giveFeedback'])->name('feedback-giveFeedback');
+    Route::post('/give',[FeedbackController::class,'give'])->name('feedback-give');
+    Route::get('/replyList',[FeedbackController::class,'replyList'])->name('feedback-replyList');
+
+
+});
 
     // ***********************************************
 });
