@@ -3,83 +3,53 @@
 namespace App\Http\Controllers;
 
 use App\Models\Feedback;
+use App\Models\User;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class FeedbackController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $feedbackList = Feedback::all();
+        // dd($feedbackList);
+        return view('admin.feedback.feedbackList', get_defined_vars());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function edit(Feedback $feedback, $id)
     {
-        //
+        // dd("hello");
+        $editFeedback = Feedback::find($id);
+        $allStudent = User::where('user_type',3)->get();
+        $allTeacher = User::where('user_type',2)->get();
+        $allCourse = Course::all();
+        return view ('admin.feedback.editFeedback', get_defined_vars());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function update_feedback(Request $request)
     {
-        //
+        Feedback::where('id',$request->id)->update([
+            'teacher_id'=>$request->teacher_id,
+            'course_id'=>$request->course_id,
+            'student_id'=>$request->student_id,
+            'feedback'=>$request->feedback,
+        ]);
+
+        $notification= array(
+            'message' =>'Feedback Updated successfully',
+            'alert-type'=>'success'
+        );
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Feedback  $feedback
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Feedback $feedback)
+    public function deleteFeedback(Feedback $feedback, $id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Feedback  $feedback
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Feedback $feedback)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Feedback  $feedback
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Feedback $feedback)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Feedback  $feedback
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Feedback $feedback)
-    {
-        //
+        // dd("ddd");
+        Feedback::where('id',$id)->delete();
+		$notification= array(
+            'message' =>'Feedback Deleted successfully',
+            'alert-type'=>'success'
+        );
+    	return redirect()->back();
     }
 }

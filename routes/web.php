@@ -5,6 +5,8 @@ use App\Models\User;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 
+use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\FeedbackReplyController;
 
 
 Route::get('/', function () {
@@ -16,6 +18,12 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::group(['middleware' => ['auth']], function (){
+    // Kamrul Route
+    // *********************************************** 
+    Route::get('feedback-list', [FeedbackController::class, 'index']);
+    Route::get('edit-feedback-{id}', [FeedbackController::class, 'edit']);
+    Route::post('update-feedback', [FeedbackController::class, 'update_feedback'])->name('update-feedback');
+    Route::get('delete-feedback-{id}', [FeedbackController::class, 'deleteFeedback']);
 
     //-------------------------------------------------------------------------------//
     //---------------------------------Sarowar---------------------------------------//
@@ -49,4 +57,15 @@ Route::prefix('teacher')->group(function(){
     //------------------------------------------------------------------------------//
 
 
+    Route::get('feedback-reply-list', [FeedbackReplyController::class, 'index']);
+    Route::get('edit-reply-{id}', [FeedbackReplyController::class, 'editReply']);
+    Route::post('update-feedback-reply', [FeedbackReplyController::class, 'updateFeedbackReply'])->name('update-feedback-reply');
+    Route::get('delete-reply-{id}', [FeedbackReplyController::class, 'deleteReply']);
+
+
+
+    
+
+
+    // ***********************************************
 });

@@ -1,4 +1,4 @@
-<header class="main-header">
+        <header class="main-header">
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top pl-30">
                 <!-- Sidebar toggle button-->

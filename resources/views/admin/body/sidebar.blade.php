@@ -1,4 +1,4 @@
-<aside class="main-sidebar">
+        <aside class="main-sidebar">
             <!-- sidebar-->
             <section class="sidebar">
 
@@ -58,8 +58,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href=""><i class="ti-more"></i>Feedback List</a></li>
-                            <li><a href=""><i class="ti-more"></i>Feedback Reply List</a></li>
+                            <li><a href="{{url('feedback-list')}}"><i class="ti-more"></i>Feedback List</a></li>
+                            <li><a href="{{url('feedback-reply-list')}}"><i class="ti-more"></i>Feedback Reply List</a></li>
                         </ul>
                     </li>                    
                     <li class="treeview">
