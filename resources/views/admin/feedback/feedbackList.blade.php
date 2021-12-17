@@ -41,11 +41,11 @@ Feedback List
                                     ?>
                                 </td>
                                 <td>{{$row->student->name}}</td>
-								<td>{{$row->feedback_date}}</td>
+								<td>{{$row->created_at}}</td>
 								<td>{{$row->feedback}}</td>
 								<td>
-                                    <a href="{{url('edit-feedback-'.$row->id)}}" style="padding-right:15px;"><span class="fa fa-edit"></span></a>
-                                    <a href="{{url('delete-feedback-'.$row->id)}}"><span class="fa fa-trash"></span></a>
+                                    <a href="{{url('edit-feedback-'.$row->id)}}" class="btn btn-info ">Edit</a>
+                                    <a href="{{url('delete-feedback-'.$row->id)}}"class=" btn btn-danger "id="delete">Delete</a>
                                 </td>
 
 							</tr>
