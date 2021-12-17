@@ -17,6 +17,7 @@ class CreateAssignTeacherCoursesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('teacher_id')->nullable();
             $table->unsignedBigInteger('course_id')->nullable();
+            $table->date('academic_year')->nullable();
             $table->date('date')->nullable();
 
             $table->timestamps();

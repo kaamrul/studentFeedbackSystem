@@ -7,7 +7,15 @@
                         <a href="{{route('dashboard')}}">
                             <!-- logo for regular state and mobile devices -->
                             <div class="d-flex align-items-center justify-content-center">
-                                <h3><b>Admin</b> Dashboard</h3>
+                                <h4><b>
+                                @if(Auth::user()->user_type == 1)
+                                    Admin
+                                @elseif(Auth::user()->user_type == 2)
+                                    Teacher
+                                @elseif(Auth::user()->user_type == 3)
+                                    Student
+                                @endif
+                                </b> {{Auth::user()->name}}</h4>
                             </div>
                         </a>
                     </div>
@@ -22,6 +30,8 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
+
+                    @if(Auth::user()->user_type == 1)
 
                     <li class="treeview">
                         <a href="#">
@@ -71,7 +81,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href=""><i class="ti-more"></i>Department</a></li>
+                            <li><a href="{{route('department-view')}}"><i class="ti-more"></i>Department</a></li>
                         </ul>
                     </li>                   
                     <li class="treeview">
@@ -83,9 +93,45 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href=""><i class="ti-more"></i>Course</a></li>
+                            <li><a href="{{route('course-view')}}"><i class="ti-more"></i>Course</a></li>
+                            <li><a href="{{route('teacherss-view')}}"><i class="ti-more"></i>Assign Course to Teacher</a></li>
+                            <li><a href="{{route('studentss-view')}}"><i class="ti-more"></i>Assign Course to Student</a></li>
                         </ul>
                     </li>
+
+                    @endif
+
+                    @if(Auth::user()->user_type == 2)
+                    <li class="treeview">
+                        <a href="#">
+                            <i data-feather="user"></i>
+                            <span>Manage Feedback</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-right pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{route('feedback-teachersList')}}"><i class="ti-more"></i>Feedback </a></li>
+                        </ul>
+                    </li>
+                    @endif
+
+                    
+                    @if(Auth::user()->user_type == 3)
+                    <li class="treeview">
+                        <a href="{{route('studentss-view')}}">
+                            <i data-feather="user"></i>
+                            <span>Manage Feedback</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-right pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="{{route('feedback-studentList')}}"><i class="ti-more"></i>Feedback </a></li>
+                            <li><a href="{{route('feedback-replyList')}}"><i class="ti-more"></i>Feedback Result </a></li>
+                        </ul>
+                    </li>
+                    @endif
 
                 </ul>
             </section>

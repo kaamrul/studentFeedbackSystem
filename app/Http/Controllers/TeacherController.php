@@ -28,7 +28,7 @@ class TeacherController extends Controller
    
     public function store(Request $request)
     {
-        //dd($request->all());
+        // dd($request->all());
         $validatedData= $request->validate([
 
             'email'=>'required|unique:users',
