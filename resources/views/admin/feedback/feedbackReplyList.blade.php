@@ -42,7 +42,7 @@ Feedback Reply List
                                     ?>
                                 </td>
                                 <td>{{$row->student->name}}</td>
-								<td>{{$row->reply_date}}</td>
+								<td>{{$row->created_at}}</td>
 								<td>
                                     <?php
                                         $feedbacks=\App\Models\Feedback::where('id',$row->feedback_id)->first();
@@ -52,8 +52,8 @@ Feedback Reply List
 								<td>{{$row->reply}}</td>
 
 								<td>
-                                    <a href="{{url('edit-reply-'.$row->id)}}" style="padding-right:15px;"><span class="fa fa-edit"></span></a>
-                                    <a href="{{url('delete-reply-'.$row->id)}}"><span class="fa fa-trash"></span></a>
+                                    <a href="{{url('edit-reply-'.$row->id)}}" class="btn btn-info ">Edit</a>
+                                    <a href="{{url('delete-reply-'.$row->id)}}" class=" btn btn-danger "id="delete">Delete</a>
                                 </td>
 
 							</tr>
